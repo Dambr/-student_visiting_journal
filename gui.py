@@ -11,7 +11,7 @@ class WindowApplication():
 		self.labels = [''] * (len(obj) + 1)
 		for i in range(len(self.labels)):
 			self.labels[i] = Label(root,
-				font = ('Verdana', 30),
+				font = ('Verdana', 20),
 				justify = LEFT
 				)
 
@@ -25,7 +25,7 @@ class WindowApplication():
 		self.entry = [''] * len(obj)
 		for i in range(len(self.entry)):
 			self.entry[i] = Entry(
-				font = ('Verdana', 30),
+				font = ('Verdana', 20),
 				justify = CENTER,
 				relief = SOLID,
 				width = 2
@@ -37,14 +37,14 @@ class WindowApplication():
 		self.buttons = [''] * 2
 		for i in range(len(self.buttons)):
 			self.buttons[i] = Button(root,
-				font = ('Verdana', 20)
+				font = ('Verdana', 10)
 			)
 
 		self.buttons[0]['text'] = 'Применить'
 		self.buttons[1]['text'] = 'Отобразить журнал'
 
 		self.buttons[0].place(x = 0, y = 0)
-		self.buttons[1].place(x = 200, y = 0)
+		self.buttons[1].place(x = 270, y = 0)
 
 		self.buttons[0].bind('<ButtonRelease-1>', self.main)
 		self.buttons[1].bind('<ButtonRelease-1>', self.show)
@@ -101,7 +101,7 @@ class WindowApplication():
 		child.resizable(width=False, height=False)
 
 		label = Label(child,
-			font = ('Verdana', 20)
+			font = ('Verdana', 10)
 			)
 		label['text'] = df
 		label.place(x = 0, y = 50)

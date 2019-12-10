@@ -1,29 +1,41 @@
 [
-	{
-		"name": "Gymnastics",
-		"visiting": [
-			{
-				"date": "2019-12-09",
-				"presence": true
-			}
-		]
-	},
-	{
-		"name": "Dancing",
-		"visiting": [
-			{
-				"date": "2019-12-09",
-				"presence": true
-			}
-		]
-	},
-	{
-		"name": "Drawing",
-		"visiting": [
-			{
-				"date": "2019-12-09",
-				"presence": false
-			}
-		]
-	}
+    {
+        "name": "Singing",
+        "visiting": [
+            {
+                "date": "2019-12-09",
+                "presence": true
+            },
+            {
+                "date": "2019-12-10",
+                "presence": false
+            }
+        ]
+    },
+    {
+        "name": "Dancing",
+        "visiting": [
+            {
+                "date": "2019-12-09",
+                "presence": true
+            },
+            {
+                "date": "2019-12-10",
+                "presence": true
+            }
+        ]
+    },
+    {
+        "name": "Drawing",
+        "visiting": [
+            {
+                "date": "2019-12-09",
+                "presence": false
+            },
+            {
+                "date": "2019-12-10",
+                "presence": true
+            }
+        ]
+    }
 ]
