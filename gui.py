@@ -11,7 +11,7 @@ class WindowApplication():
 		self.labels = [''] * (len(obj) + 1)
 		for i in range(len(self.labels)):
 			self.labels[i] = Label(root,
-				font = ('Verdana', 20),
+				font = ('Verdana', 15),
 				justify = LEFT
 				)
 		now = datetime.datetime.now()
@@ -21,7 +21,7 @@ class WindowApplication():
 
 		for i in range(len(obj)):
 			self.labels[i + 1]['text'] = obj[i]['name']
-			self.labels[i + 1].place(x = 20, y = 60 * (i + 2))
+			self.labels[i + 1].place(x = 20, y = 50 * (i + 2))
 
 		self.entry = [''] * len(obj)
 		for i in range(len(self.entry)):
@@ -33,7 +33,7 @@ class WindowApplication():
 				)
 		
 		for i in range(len(obj)):
-			self.entry[i].place(x = 300, y = 60 * (i + 2))
+			self.entry[i].place(x = 300, y = 50 * (i + 2))
 
 		self.buttons = [''] * 2
 		for i in range(len(self.buttons)):
@@ -51,7 +51,7 @@ class WindowApplication():
 		self.buttons[1].bind('<ButtonRelease-1>', self.show)
 
 	def get_config(self, file_name):
-		file = open(file_name, 'r')
+		file = open(file_name, 'r', encoding='utf-8')
 		result = json.load(file)
 		file.close()
 		return result
@@ -103,7 +103,7 @@ class WindowApplication():
 		child.resizable(width=False, height=False)
 
 		label = Label(child,
-			font = ('Verdana', 20),
+			font = ('Verdana', 15),
 			justify = RIGHT
 			)
 		label['text'] = df

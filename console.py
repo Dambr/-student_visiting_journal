@@ -3,7 +3,7 @@ import datetime
 import pandas as pd
 
 def get_config(file_name):
-	file = open(file_name, 'r')
+	file = open(file_name, 'r', encoding='utf-8')
 	result = json.load(file)
 	file.close()
 	return result

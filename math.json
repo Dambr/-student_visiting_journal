@@ -5,6 +5,10 @@
             {
                 "date": "24.12.2019",
                 "presence": true
+            },
+            {
+                "date": "25.12.2019",
+                "presence": false
             }
         ]
     },
@@ -13,6 +17,10 @@
         "visit": [
             {
                 "date": "24.12.2019",
+                "presence": true
+            },
+            {
+                "date": "25.12.2019",
                 "presence": true
             }
         ]
@@ -23,6 +31,10 @@
             {
                 "date": "24.12.2019",
                 "presence": true
+            },
+            {
+                "date": "25.12.2019",
+                "presence": false
             }
         ]
     },
@@ -32,6 +44,10 @@
             {
                 "date": "24.12.2019",
                 "presence": true
+            },
+            {
+                "date": "25.12.2019",
+                "presence": false
             }
         ]
     },
@@ -40,6 +56,10 @@
         "visit": [
             {
                 "date": "24.12.2019",
+                "presence": true
+            },
+            {
+                "date": "25.12.2019",
                 "presence": true
             }
         ]
@@ -50,6 +70,10 @@
             {
                 "date": "24.12.2019",
                 "presence": true
+            },
+            {
+                "date": "25.12.2019",
+                "presence": false
             }
         ]
     },
@@ -59,6 +83,10 @@
             {
                 "date": "24.12.2019",
                 "presence": true
+            },
+            {
+                "date": "25.12.2019",
+                "presence": false
             }
         ]
     },
@@ -67,6 +95,10 @@
         "visit": [
             {
                 "date": "24.12.2019",
+                "presence": true
+            },
+            {
+                "date": "25.12.2019",
                 "presence": true
             }
         ]
@@ -77,6 +109,10 @@
             {
                 "date": "24.12.2019",
                 "presence": true
+            },
+            {
+                "date": "25.12.2019",
+                "presence": true
             }
         ]
     },
@@ -85,6 +121,10 @@
         "visit": [
             {
                 "date": "24.12.2019",
+                "presence": true
+            },
+            {
+                "date": "25.12.2019",
                 "presence": true
             }
         ]
