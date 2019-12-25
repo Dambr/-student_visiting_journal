@@ -6,7 +6,7 @@ import pandas as pd
 class WindowApplication():
 
 	def __init__(self):
-		obj = self.getData('group.json')
+		obj = self.get_config('math.json')
 
 		self.labels = [''] * (len(obj) + 1)
 		for i in range(len(self.labels)):
@@ -14,8 +14,9 @@ class WindowApplication():
 				font = ('Verdana', 20),
 				justify = LEFT
 				)
-
-		self.labels[0]['text'] = str(datetime.date.today())
+		now = datetime.datetime.now()
+		now = str(now.day) + '.' + str(now.month) + '.' + str(now.year)
+		self.labels[0]['text'] = now
 		self.labels[0].place(x = 110, y = 40)
 
 		for i in range(len(obj)):
@@ -49,51 +50,52 @@ class WindowApplication():
 		self.buttons[0].bind('<ButtonRelease-1>', self.main)
 		self.buttons[1].bind('<ButtonRelease-1>', self.show)
 
-	def getData(self, fileName):
-		file = open(fileName, 'r')
-		data = json.load(file)
+	def get_config(self, file_name):
+		file = open(file_name, 'r')
+		result = json.load(file)
 		file.close()
-		return data
+		return result
 
-	def writeFile(self, fileName, data):
-		file = open(fileName, 'w')
-		json.dump(data, file, indent=4)
+	def write_file(self, file_name, content):
+		file = open(file_name, 'w')
+		json.dump(content, file, indent=4, ensure_ascii=False)
 		file.close()
 
-	def inputPresence(self, stud):
-		if stud != '-' or stud != '':
-			return True
-		else:
-			return False
+	def get_valid_visit(self, number):
+		return str(self.entry[number].get()) == '+'
+		
 
 	def main(self, event):
-		data = self.getData('group.json')
-		
-		for i in range(len(data)):
-			data[i]['visiting'].append({
-				"date": str(datetime.date.today()),
-				"presence": self.inputPresence( str(self.entry[i]) )
-				})
+		config = self.get_config('math.json')
 
-		self.writeFile('group.json', data)
+
+		now = datetime.datetime.now()
+		now = str(now.day) + '.' + str(now.month) + '.' + str(now.year)
+		#print(now)
+		for i in range(len(config)):
+			config[i]['visit'].append({
+				'date': now,
+				'presence': self.get_valid_visit(i)
+			})
+
+		self.write_file('math.json', config)
 
 	def show(self, event):
-		data = self.getData('group.json')
+		config = self.get_config('math.json')
+		index = []
+		column = []
+		df = []
+		for i in range(len(config)):
+			index.append(config[i]['name'])
+			_df = []
+			for j in range(len(config[i]['visit'])):
+				_df.append(config[i]['visit'][j]['presence'])
+			df.append(_df)
 
-		date = list()
-		for i in range(len(data[0]['visiting'])):
-			date.append(data[0]['visiting'][i]['date'])
+		for i in range(len(config[0]['visit'])):
+			column.append(config[0]['visit'][i]['date'])
 
-		mtx = dict()
-		for i in range(len(data)):
-			presence = list()
-			for j in range(len(data[i]['visiting'])):
-				presence.append(data[i]['visiting'][j]['presence']) 
-			mtx[str(data[i]['name'])] = presence
-
-		df = pd.DataFrame(mtx, index=date)
-		df = df.T
-		df = df[sorted(list(df.columns.values))]
+		df = pd.DataFrame(df, index = index, columns = column)
 
 		child = Tk()
 		child.title('Просмотр журнала')
@@ -101,7 +103,8 @@ class WindowApplication():
 		child.resizable(width=False, height=False)
 
 		label = Label(child,
-			font = ('Verdana', 10)
+			font = ('Verdana', 20),
+			justify = RIGHT
 			)
 		label['text'] = df
 		label.place(x = 0, y = 50)
@@ -111,6 +114,6 @@ class WindowApplication():
 root = Tk()
 root.title('Журнал посещения занятий')
 root.wm_geometry('415x500')
-root.resizable(width=False, height=False)
+root.resizable(width=False, height=True)
 application = WindowApplication()	
 root.mainloop()

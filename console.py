@@ -2,48 +2,55 @@ import json
 import datetime
 import pandas as pd
 
-def getData(fileName):
-	file = open(fileName, 'r')
-	data = json.load(file)
+def get_config(file_name):
+	file = open(file_name, 'r')
+	result = json.load(file)
 	file.close()
-	return data
+	return result
 
-def writeFile(fileName, data):
-	file = open(fileName, 'w')
-	json.dump(data, file, indent=4)
-	file.close()
-
-def inputPresence(stud):
+def get_valid_visit(name):
 	while True:
-		result = str(input(str(stud) + '? '))
+		result = str(input(name + ': '))
 		if result == '+' or result == '-':
 			return result == '+'
 
-print(datetime.date.today())
+def write_file(file_name, content):
+	file = open(file_name, 'w')
+	json.dump(content, file, indent=4, ensure_ascii=False)
+	file.close()
 
-data = getData('group.json')
+config = get_config('math.json')
 
-for i in range(len(data)):
-	data[i]['visiting'].append({
-		"date": str(datetime.date.today()),
-		"presence": inputPresence( str(data[i]['name']) )
-		})
 
-writeFile('group.json', data)
+now = datetime.datetime.now()
+now = str(now.day) + '.' + str(now.month) + '.' + str(now.year)
+print(now)
 
-date = list()
-for i in range(len(data[0]['visiting'])):
-	date.append(data[0]['visiting'][i]['date'])
 
-mtx = dict()
-for i in range(len(data)):
-	presence = list()
-	for j in range(len(data[i]['visiting'])):
-		presence.append(data[i]['visiting'][j]['presence']) 
-	mtx[str(data[i]['name'])] = presence
+index = []
+column = []
+df = []
+for i in range(len(config)):
+	index.append(config[i]['name'])
+	config[i]['visit'].append({
+		'date': now,
+		'presence': get_valid_visit(config[i]['name'])
+	})
+	_df = []
+	for j in range(len(config[i]['visit'])):
+		_df.append(config[i]['visit'][j]['presence'])
+	df.append(_df)
 
-df = pd.DataFrame(mtx, index=date)
-df = df.T
-df = df[sorted(list(df.columns.values))]
+for i in range(len(config[0]['visit'])):
+	column.append(config[0]['visit'][i]['date'])
+
+
+
+df = pd.DataFrame(df, index = index, columns = column)
 
 print(df)
+
+write_file('math.json', config)
+# print(json.dumps(config, indent=4, ensure_ascii=False))
+
+
